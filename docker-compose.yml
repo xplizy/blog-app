@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  blog:
+    build: .
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+      - "8181:8181"
+    depends_on:
+      - db
+    environment:
+      - MONGO_URI=mongodb://db:27017/blog-db
+      - NODE_ENV=development
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mynetwork
+
+  db:
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mynetwork
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-data:
+
+networks:
+  mynetwork:

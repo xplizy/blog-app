@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/blog-db', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://db:27017/blog-db', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
